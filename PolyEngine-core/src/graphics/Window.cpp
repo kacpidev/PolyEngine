@@ -4,7 +4,11 @@ namespace PolyEngine
 {
 	namespace Graphics
 	{
-		void windowResize(GLFWwindow *window, int width, int height);
+		bool Window::mKeys[MAX_KEYS];
+		bool Window::mButtons[MAX_BUTTONS];
+		double Window::mMouseY;
+		double Window::mMouseX;
+
 
 		Window::~Window()
 		{
@@ -26,7 +30,11 @@ namespace PolyEngine
 				return false;
 			}
 			glfwMakeContextCurrent(mWindow);
+			glfwSetWindowUserPointer(mWindow, this);
 			glfwSetWindowSizeCallback(mWindow, windowResize);
+			glfwSetKeyCallback(mWindow, keyCallback);
+			glfwSetMouseButtonCallback(mWindow, mouseButtonCallback);
+			glfwSetCursorPosCallback(mWindow, mousePositionCallback);
 			
 			std::cout << "OpenGL" << glGetString(GL_VERSION) << std::endl;
 
@@ -55,19 +63,46 @@ namespace PolyEngine
 			return glfwWindowShouldClose(mWindow) == 1;
 		}
 
-		int Window::getWidth() const
-		{
-			return mWidth;
-		}
-
-		int Window::getHeight() const
-		{
-			return mHeight;
-		}
-
 		void windowResize(GLFWwindow *window, int width, int height)
 		{
 			glViewport(0, 0, width, height);
+		}
+
+		void keyCallback(GLFWwindow *window, int key, int scancode, int action, int mods)
+		{
+			Window* win = static_cast<Window*>(glfwGetWindowUserPointer(window));
+			win->mKeys[key] = action != GLFW_RELEASE;
+		}
+
+		void mouseButtonCallback(GLFWwindow *window, int button, int action, int mods)
+		{
+			Window* win = static_cast<Window*>(glfwGetWindowUserPointer(window));
+			win->mButtons[button] = action != GLFW_RELEASE;
+		}
+
+		void mousePositionCallback(GLFWwindow *window, double xpos, double ypos)
+		{
+			Window* win = static_cast<Window*>(glfwGetWindowUserPointer(window));
+			win->mMouseX = xpos;
+			win->mMouseY = ypos;
+		}
+
+		bool Window::isKeyPressed(unsigned int keyCode) const
+		{
+			if (keyCode >= MAX_KEYS)
+			{
+				return false;
+			}
+			return mKeys[keyCode];
+		}
+
+		bool Window::isMouseButtonPressed(unsigned int button) const 
+		{
+			if (button >= MAX_BUTTONS)
+			{
+				return false;
+			}
+			return mButtons[button];
 		}
 	}
 }
