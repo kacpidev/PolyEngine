@@ -70,16 +70,20 @@
     <LibraryPath>$(solutionDir)Dependencies\GLFW\lib-vc2013;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <IncludePath>$(solutionDir)Dependencies\GLFW\include;$(IncludePath)</IncludePath>
-    <LibraryPath>$(solutionDir)Dependencies\GLFW\lib-vc2013;$(LibraryPath)</LibraryPath>
+    <IncludePath>$(solutionDir)Dependencies\GLEW\include;$(solutionDir)Dependencies\GLFW\include;$(IncludePath)</IncludePath>
+    <LibraryPath>$(solutionDir)Dependencies\GLEW\lib;$(solutionDir)Dependencies\GLFW\lib-vc2013;$(LibraryPath)</LibraryPath>
+    <OutDir>$(SolutionDir)bin\$(Platform)\$(Configuration)\</OutDir>
+    <IntDir>$(SolutionDir)bin\$(Platform)\$(Configuration)\Intermediate</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <IncludePath>$(solutionDir)Dependencies\GLFW\include;$(IncludePath)</IncludePath>
     <LibraryPath>$(solutionDir)Dependencies\GLFW\lib-vc2013;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <IncludePath>$(solutionDir)Dependencies\GLFW\include;$(IncludePath)</IncludePath>
-    <LibraryPath>$(solutionDir)Dependencies\GLFW\lib-vc2013;$(LibraryPath)</LibraryPath>
+    <IncludePath>$(solutionDir)Dependencies\GLEW\include;$(solutionDir)Dependencies\GLFW\include;$(IncludePath)</IncludePath>
+    <LibraryPath>$(solutionDir)Dependencies\GLEW\lib;$(solutionDir)Dependencies\GLFW\lib-vc2013;$(LibraryPath)</LibraryPath>
+    <OutDir>$(SolutionDir)bin\$(Platform)\$(Configuration)\</OutDir>
+    <IntDir>$(SolutionDir)bin\$(Platform)\$(Configuration)\Intermediate</IntDir>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -98,10 +102,11 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>GLEW_STATIC;_MBCS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>glfw3.lib;opengl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>glew32s.lib;glfw3.lib;opengl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <SubSystem>NotSet</SubSystem>
     </Link>
   </ItemDefinitionGroup>
@@ -128,12 +133,13 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>GLEW_STATIC;_MBCS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <AdditionalDependencies>glfw3.lib;opengl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>glew32s.lib;glfw3.lib;opengl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <SubSystem>NotSet</SubSystem>
     </Link>
   </ItemDefinitionGroup>

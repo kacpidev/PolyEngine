@@ -27,6 +27,15 @@ namespace PolyEngine
 			}
 			glfwMakeContextCurrent(mWindow);
 			glfwSetWindowSizeCallback(mWindow, windowResize);
+			
+			std::cout << "OpenGL" << glGetString(GL_VERSION) << std::endl;
+
+			if (glewInit() != GLEW_OK)
+			{
+				std::cout << "Failed to init GLEW!" << std::endl;
+				return false;
+			}
+
 			return true;
 		}
 
