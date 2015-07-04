@@ -1,14 +1,13 @@
 #include "Window.h"
 
-namespace PolyEngine
+namespace PE
 {
 	namespace Graphics
 	{
-		bool Window::mKeys[MAX_KEYS];
-		bool Window::mButtons[MAX_BUTTONS];
-		double Window::mMouseY;
-		double Window::mMouseX;
-
+		void windowResize(GLFWwindow *window, int width, int height);
+		void keyCallback(GLFWwindow *window, int key, int scancode, int action, int mods);
+		void mouseButtonCallback(GLFWwindow *window, int button, int action, int mods);
+		void mousePositionCallback(GLFWwindow *window, double xpos, double ypos);
 
 		Window::~Window()
 		{
@@ -70,25 +69,26 @@ namespace PolyEngine
 
 		void keyCallback(GLFWwindow *window, int key, int scancode, int action, int mods)
 		{
-			Window* win = static_cast<Window*>(glfwGetWindowUserPointer(window));
+			auto win = static_cast<Window*>(glfwGetWindowUserPointer(window));
 			win->mKeys[key] = action != GLFW_RELEASE;
 		}
 
 		void mouseButtonCallback(GLFWwindow *window, int button, int action, int mods)
 		{
-			Window* win = static_cast<Window*>(glfwGetWindowUserPointer(window));
+			auto win = static_cast<Window*>(glfwGetWindowUserPointer(window));
 			win->mButtons[button] = action != GLFW_RELEASE;
 		}
 
 		void mousePositionCallback(GLFWwindow *window, double xpos, double ypos)
 		{
-			Window* win = static_cast<Window*>(glfwGetWindowUserPointer(window));
+			auto win = static_cast<Window*>(glfwGetWindowUserPointer(window));
 			win->mMouseX = xpos;
 			win->mMouseY = ypos;
 		}
 
 		bool Window::isKeyPressed(unsigned int keyCode) const
 		{
+			//TODO: Log this
 			if (keyCode >= MAX_KEYS)
 			{
 				return false;
@@ -98,6 +98,7 @@ namespace PolyEngine
 
 		bool Window::isMouseButtonPressed(unsigned int button) const 
 		{
+			//TODO: Log this
 			if (button >= MAX_BUTTONS)
 			{
 				return false;

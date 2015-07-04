@@ -9,7 +9,7 @@ Main Window class
 #include <GLFW/glfw3.h>
 #include <iostream>
 
-namespace PolyEngine
+namespace PE
 {
 	namespace Graphics
 	{
@@ -40,6 +40,10 @@ namespace PolyEngine
 					key = false;
 				}
 
+				for (auto button : mButtons)
+				{
+					button = false;
+				}
 			};
 			
 			~Window();
@@ -56,12 +60,12 @@ namespace PolyEngine
 			bool isMouseButtonPressed(unsigned int button) const;
 		private:
 			bool init();
-			friend static void windowResize(GLFWwindow *window, int width, int height);
-			friend static void keyCallback(GLFWwindow *window, int key, int scancode, int action, int mods);
-			friend static void mouseButtonCallback(GLFWwindow *window, int button, int action, int mods);
-			friend static void mousePositionCallback(GLFWwindow *window, double xpos, double ypos);
-		};
 
+			friend void windowResize(GLFWwindow *window, int width, int height);
+			friend void keyCallback(GLFWwindow *window, int key, int scancode, int action, int mods);
+			friend void mouseButtonCallback(GLFWwindow *window, int button, int action, int mods);
+			friend void mousePositionCallback(GLFWwindow *window, double xpos, double ypos);
+		};
 	}
 }
 
