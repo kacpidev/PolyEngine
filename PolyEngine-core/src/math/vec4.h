@@ -10,8 +10,8 @@ namespace PE
 
 		struct vec4
 		{
-			float x{ 0.0f }, y{ 0.0f }, z{0.0f}, w{0.0f};
-			vec4(){};
+			float x,y,z,w;
+			vec4() = default;
 			vec4(const vec3& vector);
 			vec4(const float& var);
 			vec4(const float &x, const float &y, const float &z, const float &w) : x(x), y(y), z(z), w(w)	{};
