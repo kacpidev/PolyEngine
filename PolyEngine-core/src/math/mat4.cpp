@@ -66,7 +66,7 @@ namespace PE
 			return multiply(other);
 		}
 
-		mat4 mat4::orthographic(float near, float far, float left, float right, float bottom, float top)
+		mat4 mat4::orthographic(float left, float right, float bottom, float top, float near, float far)
 		{
 			mat4 result(1.0f);
 
@@ -81,7 +81,7 @@ namespace PE
 			return result;
 		}
 
-		mat4 mat4::perspective(float near, float far, int fov, float aspectRatio)
+		mat4 mat4::perspective(int fov, float aspectRatio, float near, float far)
 		{
 			mat4 result(1.0f);
 
@@ -92,9 +92,9 @@ namespace PE
 
 			result.elements[0 + 0 * 4] = a;
 			result.elements[1 + 1 * 4] = q;
-			result.elements[3 + 2 * 4] = -1.0f;
 			result.elements[2 + 2 * 4] = b;
 			result.elements[2 + 3 * 4] = c;
+			result.elements[3 + 2 * 4] = -1.0f;
 			
 			return result;
 		}

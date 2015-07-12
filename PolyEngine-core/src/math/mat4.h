@@ -24,9 +24,9 @@ namespace PE
 			mat4& operator*=(const mat4& other);
 		
 			//PROJECTION MATRICIES
-			static mat4 orthographic(float near, float far, float left, float right, float bottom, float top);
-			static mat4 perspective(float near, float fat, int fov, float aspectRatio);
-			
+			static mat4 orthographic(float left, float right, float bottom, float top, float near, float far);
+			static mat4 perspective(int fov, float aspectRatio, float near, float far);
+
 			//TRANSLATION
 			static mat4 translation(const vec3 &vector);
 			static mat4 rotation(float angle, const vec3 &vector);
